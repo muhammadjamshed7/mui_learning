@@ -1,22 +1,41 @@
-import { AppBar, Toolbar, Typography, Button } from "@mui/material";
+"use client";
+import {
+	AppBar,
+	Toolbar,
+	Typography,
+	Button,
+	Tabs,
+	Tab,
+	Card,
+} from "@mui/material";
+import { useState } from "react";
 const Appbar = () => {
+	const [value, setvalue] = useState(0);
 	return (
 		<>
-			<AppBar>
+			<AppBar sx={{ position: "absolute" }}>
 				<Toolbar
 					sx={{
 						display: "flex",
-						justifyContent: "space-between",
+						// justifyContent: "space-between",
 						background: "lightgray",
 					}}
 				>
 					<Typography variant="h6" color="primary">
 						Logo
 					</Typography>
-					<Button variant="contained">Sign In</Button>
-					<Button variant="filled" sx={{ color: "green" }}>
-						Sign Out
-					</Button>
+
+					<Tabs
+						value={value}
+						onChange={(e, val) => setvalue(val)}
+						sx={{ marginLeft: "auto" }}
+						indicatorColor="secondary"
+						// textColor="inherit"
+					>
+						<Tab label="Home" />
+						<Tab label="About" />
+						<Tab label="Contact" />
+					</Tabs>
 				</Toolbar>
 			</AppBar>
 		</>
