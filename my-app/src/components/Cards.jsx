@@ -2,10 +2,18 @@
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 import { Grid } from "@mui/material";
+
+import Dialog from "@mui/material/Dialog";
+import Button from "@mui/material/Button";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import { useState } from "react";
 // import data from "@/data.js";
 const data = [
 	{
@@ -32,41 +40,31 @@ const data = [
 		title: "eum et est ",
 		body: "https://images.unsplash.com/photo-1714765717963-77b398825d7d?q=80&w=1636&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 	},
-	{
-		userId: "Sultan",
-		id: 5,
-		title: " quas odio",
-		body: "https://images.unsplash.com/photo-1714906472874-63482f7cef44?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-	},
-	{
-		userId: "Minhal",
-		id: 6,
-		title: " quas odio",
-		body: "https://images.unsplash.com/photo-1714906472874-63482f7cef44?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-	},
 ];
 
 const Cards = () => {
+	const [open, setOpen] = useState(false);
+
 	return (
 		<>
-			<Grid container>
+			<Grid container spacing={4}>
 				{data.map((item, val) => (
 					<Grid
 						item
-						md={3}
-						lg={4}
+						md={6}
+						lg={3}
 						sm={12}
 						key={val}
 						display="flex"
 						justifyContent="center"
+						alignItem="center"
 					>
 						<Card
 							elevation={12}
 							sx={{
-								maxWidth: 345,
-								height: 500,
-								marginTop: "100px",
-								padding: "10px",
+								maxWidth: 335,
+
+								marginTop: "80px",
 							}}
 						>
 							<CardContent>
@@ -89,12 +87,28 @@ const Cards = () => {
 									eaque dolore aliquam, incidunt quam eos.
 								</Typography>
 								<CardActions sx={{ marginLeft: "auto" }}>
-									<Button variant="contained">Share</Button>
+									<Button variant="contained" onClick={() => setOpen(true)}>
+										Share
+									</Button>
 								</CardActions>
 							</CardContent>
 						</Card>
 					</Grid>
 				))}
+				<Dialog open={open} onClose={() => setOpen(false)}>
+					<DialogTitle>Are you sure?</DialogTitle>
+					<DialogContent>
+						<DialogContentText>
+							Are you sure to delete this product ?
+						</DialogContentText>
+					</DialogContent>
+					<DialogActions>
+						<Button onClick={() => setOpen(false)}>Cancel</Button>
+					</DialogActions>
+					<DialogActions>
+						<Button>Delete</Button>
+					</DialogActions>
+				</Dialog>
 			</Grid>
 		</>
 	);
